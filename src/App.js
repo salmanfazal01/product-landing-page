@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { makeStyles, ThemeProvider } from "@material-ui/core";
+import { getTheme } from "./config/theme";
+import Layout from "./Layout";
+import HomePage from "./pages/Home";
 
-function App() {
+const useStyles = ({}) =>
+  makeStyles((theme) => ({
+    container: {
+      backgroundColor: theme.palette.background.main,
+      color: theme.palette.primary.text,
+    },
+  }));
+
+const App = (props) => {
+  const classes = useStyles(props)();
+  const _theme = getTheme("light");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={_theme}>
+      <Layout>
+        <HomePage />
+      </Layout>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
